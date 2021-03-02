@@ -3,6 +3,11 @@
 namespace nav_mesh {
 	class vec3_t {
 	public:
+		vec3_t(float x=0, float y=0, float z=0) {
+			this->x = x;
+			this->y = y;
+			this->z = z;
+		}
 		vec3_t operator+( const vec3_t other )	{ return { x + other.x, y + other.y, z + other.z }; }
 		vec3_t operator-( const vec3_t other )	{ return { x - other.x, y - other.y, z - other.z }; }
 		vec3_t operator*( const float m )		{ return { x * m, y * m, z* m }; }
@@ -57,17 +62,17 @@ namespace nav_mesh {
 
 	struct nav_spot_order_t {
 		float t = 0.f;
-		
+
 		union {
 			std::uint32_t id;
 			void* hiding_spot = nullptr;
 		};
 	};
 
-	struct nav_spot_encounter_t {	
-		nav_connect_t from = { }, to = { };		
+	struct nav_spot_encounter_t {
+		nav_connect_t from = { }, to = { };
 		std::uint8_t from_direction = 0, to_direction = 0;
-		
+
 		std::vector< nav_spot_order_t > spot_order = { };
 	};
 }

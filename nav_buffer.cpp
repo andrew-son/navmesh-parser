@@ -1,5 +1,6 @@
 #include "nav_buffer.h"
 #include <iterator>
+#include <stdexcept>
 
 namespace nav_mesh {
 	nav_buffer::~nav_buffer( ) {
@@ -8,14 +9,14 @@ namespace nav_mesh {
 
 	void nav_buffer::load_from_file( std::string_view nav_mesh_file ) {
 		clear( );
-		
+
 		std::ifstream nav_file( nav_mesh_file.data( ), std::istream::binary );
 
 		if ( !nav_file.is_open( ) )
-			throw std::exception( "nav_buffer::load_from_file: couldn't open .nav file" );
+			throw std::runtime_error( "nav_buffer::load_from_file: couldn't open .nav file" );
 
 		nav_file.unsetf( std::istream::skipws );
-		
+
 		nav_file.seekg( 0, std::istream::end );
 		std::streampos file_size = nav_file.tellg( );
 		nav_file.seekg( 0, std::istream::beg );

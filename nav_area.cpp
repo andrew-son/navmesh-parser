@@ -27,8 +27,8 @@ namespace nav_mesh {
 		m_id = buffer.read< std::uint32_t >( );
 		m_attribute_flags = buffer.read< std::uint32_t >( );
 
-		buffer.read( &m_nw_corner, sizeof vec3_t );
-		buffer.read( &m_se_corner, sizeof vec3_t );
+		buffer.read( &m_nw_corner, sizeof(vec3_t) );
+		buffer.read( &m_se_corner, sizeof(vec3_t) );
 
 		m_center = ( m_nw_corner + m_se_corner ) * .5f;
 
@@ -70,7 +70,7 @@ namespace nav_mesh {
 			spot_encounter.to_direction = buffer.read< std::uint8_t >( );
 
 			auto spot_count = buffer.read< std::uint8_t >( );
-			
+
 			nav_spot_order_t spot_order = { };
 			for ( std::uint8_t i = 0; i < spot_count; i++ ) {
 				spot_order.id = buffer.read< std::uint32_t >( );

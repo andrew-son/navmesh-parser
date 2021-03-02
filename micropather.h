@@ -81,6 +81,7 @@ typedef uintptr_t		MP_UPTR;
 	// Assume not 64 bit pointers. Get a new compiler.
 typedef unsigned MP_UPTR;
 #endif
+#include <cstring>
 
 namespace micropather {
 #ifdef GRINLIZ_NO_STL
@@ -121,7 +122,7 @@ namespace micropather {
 				T* newBuf = new T[ newAllocated ];
 				MPASSERT( m_size <= m_allocated );
 				MPASSERT( m_size < newAllocated );
-				memcpy( newBuf, m_buf, sizeof( T )*m_size );
+				std::memcpy( newBuf, m_buf, sizeof( T )*m_size );
 				delete[ ] m_buf;
 				m_buf = newBuf;
 				m_allocated = newAllocated;
@@ -281,7 +282,7 @@ namespace micropather {
 		//		pNode = New();
 		//
 		// Get the PathNode associated with this state. If the PathNode already
-		// exists (allocated and is on the current frame), it will be returned. 
+		// exists (allocated and is on the current frame), it will be returned.
 		// Else a new PathNode is allocated and returned. The returned object
 		// is always fully initialized.
 		//
@@ -472,7 +473,7 @@ namespace micropather {
 		*/
 		void Reset( );
 
-		// Debugging function to return all states that were used by the last "solve" 
+		// Debugging function to return all states that were used by the last "solve"
 		void StatesInPool( MP_VECTOR< void* >* stateVec );
 		void GetCacheData( CacheData* data );
 

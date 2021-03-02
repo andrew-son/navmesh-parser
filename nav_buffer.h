@@ -1,4 +1,5 @@
 #pragma once
+#include <cstring>
 #include <vector>
 #include <fstream>
 
@@ -22,7 +23,7 @@ namespace nav_mesh {
 		template < typename T >
 		T read( ) {
 			T read = *reinterpret_cast< T* >( m_nav_buffer.data( ) + m_bytes_read );
-			m_bytes_read += sizeof T;
+			m_bytes_read += sizeof(T);
 
 			return read;
 		}
